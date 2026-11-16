@@ -46,8 +46,15 @@ export default function Hero({
   const isSpanish = lang === "es";
   const contentLang = isSpanish ? "es" : "en";
   const actions = [
-    { label: buttonText, target: "classes", service: defaultService },
-    { label: isSpanish ? "Info nutrición" : "Nutrition info", target: "nutrition", service: nutritionServices[contentLang] },
+    { label: buttonText, description, target: "classes", service: defaultService },
+    {
+      label: isSpanish ? "Info nutrición" : "Nutrition info",
+      description: isSpanish
+        ? "Nutrición personalizada para cuidar tu cuerpo, potenciar tu energía y crear hábitos sostenibles."
+        : "Personalised nutrition to care for your body, boost your energy and build sustainable habits.",
+      target: "nutrition",
+      service: nutritionServices[contentLang],
+    },
   ];
   const actionClass = "group w-fit max-w-full items-center gap-4 bg-transparent border border-white/30 hover:border-white text-white pl-6 pr-2 py-2 rounded-full motion-safe:transition-colors duration-300 backdrop-blur-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white";
 
@@ -139,12 +146,7 @@ export default function Hero({
             {/* TEXT + CTA */}
             <div className="lg:col-span-4 flex flex-col">
 
-              {/* DESCRIPTION */}
-              <p className="text-base sm:text-lg text-white/80 leading-relaxed border-l-2 border-white/20 pl-6 font-medium mb-8 md:mb-6">
-                {description}
-              </p>
-
-              <div className="mt-6 flex flex-col items-start gap-3 md:mt-0">
+              <div className="mt-6 flex flex-col items-start gap-8 md:mt-0">
                 {actions.map((action) => {
                   const label = (
                     <>
@@ -156,6 +158,9 @@ export default function Hero({
                   );
                   return (
                     <div key={action.target} className="max-w-full">
+                      <p className="mb-6 border-l-2 border-white/20 pl-6 text-base font-medium leading-relaxed text-white/80 sm:text-lg">
+                        {action.description}
+                      </p>
                       <a href={`#${action.target}`} className={`flex md:hidden ${actionClass}`}>
                         {label}
                       </a>
