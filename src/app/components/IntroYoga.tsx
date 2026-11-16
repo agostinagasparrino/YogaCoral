@@ -93,7 +93,7 @@ export default function IntroYoga({ lang = "en" }: { lang?: string }) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: false }}
                   transition={{ delay: 0.1, duration: 0.55 }}
-                  className="text-4xl md:text-5xl font-title text-[#111] leading-[1.1] tracking-tight"
+                  className="text-4xl md:text-5xl font-title text-[#985f43] leading-[1.1] tracking-tight"
                 >
                   {t.title}
                   <span className="mt-3 block text-xl font-normal leading-relaxed text-[#8e735b] md:text-2xl">{t.subtitle}</span>
