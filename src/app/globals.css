@@ -55,3 +55,15 @@ h1, h2, h3 {
 .animate-carousel {
   animation: carousel 35s linear infinite;
 }
+
+/* Native section links animate unless the visitor prefers reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+#private-classes,
+#group-classes {
+  scroll-margin-top: 7rem;
+}

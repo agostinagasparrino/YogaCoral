@@ -74,7 +74,7 @@ export default function Hero({
 
   return (
     <>
-      <section className="relative overflow-hidden min-h-screen flex items-center justify-center">
+      <section id="top" className="relative overflow-hidden min-h-screen flex items-center justify-center">
 
         {/* LANGUAGE */}
         <div className="hidden xl:flex absolute top-10 right-10 z-50 gap-3 text-sm font-bold">
