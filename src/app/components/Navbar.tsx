@@ -11,6 +11,7 @@ const content = {
   en: {
     home: "Home",
     nutrition: "Nutrition",
+    about: "About me",
     group: "Group Classes",
     private: "Private Classes",
     button: "Book a class",
@@ -19,6 +20,7 @@ const content = {
   es: {
     home: "Inicio",
     nutrition: "Nutrición",
+    about: "Sobre mí",
     group: "Clases Grupales",
     private: "Clases Privadas",
     button: "Reservar clase",
@@ -97,11 +99,12 @@ export default function Navbar({ lang = "en" }: { lang?: string }) {
               <Image src="/images/logo.png" alt="Logo" width={160} height={80} className="h-10 md:h-14 w-auto" priority />
             </Link>
 
-            <nav className={`hidden xl:flex items-center gap-10 font-medium text-base xl:text-lg ${getColorPrimary()}`}>
+            <nav className={`hidden xl:flex items-center gap-5 font-medium text-base ${getColorPrimary()}`}>
               <Link href={`/?lang=${lang}`} className={navLinkClass("/")}>{t.home}</Link>
               <Link href={`/?lang=${lang}#group-classes`} className={navLinkClass("/#group-classes")}>{t.group}</Link>
               <Link href={`/?lang=${lang}#private-classes`} className={navLinkClass("/#private-classes")}>{t.private}</Link>
               <Link href={`/?lang=${lang}#nutrition`} className={navLinkClass("/#nutrition")}>{t.nutrition}</Link>
+              <Link href={`/?lang=${lang}#about`} className={navLinkClass("/#about")}>{t.about}</Link>
             </nav>
 
             <div className="flex items-center gap-3 md:gap-4">
@@ -131,6 +134,7 @@ export default function Navbar({ lang = "en" }: { lang?: string }) {
               <Link href={`/?lang=${lang}#group-classes`} onClick={() => setMobileOpen(false)} className={`block ${navLinkClass("/#group-classes")}`}>{t.group}</Link>
               <Link href={`/?lang=${lang}#private-classes`} onClick={() => setMobileOpen(false)} className={`block ${navLinkClass("/#private-classes")}`}>{t.private}</Link>
               <Link href={`/?lang=${lang}#nutrition`} onClick={() => setMobileOpen(false)} className={`block ${navLinkClass("/#nutrition")}`}>{t.nutrition}</Link>
+              <Link href={`/?lang=${lang}#about`} onClick={() => setMobileOpen(false)} className={`block ${navLinkClass("/#about")}`}>{t.about}</Link>
               <button 
                 className="w-full mt-2 bg-[#8e735b] text-white px-5 py-3 rounded-xl font-semibold" 
                 onClick={() => { setMobileOpen(false); setContactOpen(true); }}

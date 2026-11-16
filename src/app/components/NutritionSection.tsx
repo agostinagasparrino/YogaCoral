@@ -41,16 +41,16 @@ export default function NutritionSection({ lang }: { lang: "es" | "en" }) {
               {bookButton()}
             </div>
             <motion.div initial={false} whileInView={reduceMotion ? {} : { y: [12, 0] }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.65 }} className="relative aspect-[4/5] overflow-hidden rounded-t-[48%] rounded-b-3xl bg-[#eee3d8]">
-              <Image src="/images/nutrition/berry-bowl.webp" alt={t.photos.bowl} fill sizes="(min-width: 1024px) 440px, 90vw" className="object-cover" />
+              <Image src="/images/nutrition/berry-bowl-editorial.webp" alt={t.photos.bowl} fill sizes="(min-width: 1024px) 440px, 90vw" className="object-cover" />
             </motion.div>
           </div>
 
           <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
             <div className="grid grid-cols-5 gap-3" aria-label={lang === "es" ? "Alimentos reales y comidas caseras" : "Real food and homemade meals"}>
-              <div className="relative col-span-3 row-span-2 min-h-72 overflow-hidden rounded-2xl md:min-h-96"><Image src="/images/nutrition/balanced-meal.webp" alt={t.photos.meal} fill sizes="(min-width: 1024px) 300px, 55vw" className="object-cover" /></div>
-              <div className="relative col-span-2 aspect-square overflow-hidden rounded-2xl"><Image src="/images/nutrition/breakfast.webp" alt={t.photos.breakfast} fill sizes="(min-width: 1024px) 200px, 35vw" className="object-cover" /></div>
-              <div className="relative col-span-2 aspect-square overflow-hidden rounded-2xl"><Image src="/images/nutrition/fruit.webp" alt={t.photos.fruit} fill sizes="(min-width: 1024px) 200px, 35vw" className="object-cover" /></div>
-              <div className="relative col-span-5 h-32 overflow-hidden rounded-2xl md:h-40"><Image src="/images/nutrition/vegetable-tart.webp" alt={t.photos.tart} fill sizes="(min-width: 1024px) 500px, 90vw" className="object-cover object-[center_45%]" /></div>
+              <div className="relative col-span-3 row-span-2 min-h-72 overflow-hidden rounded-2xl md:min-h-96"><Image src="/images/nutrition/balanced-meal-editorial.webp" alt={t.photos.meal} fill sizes="(min-width: 1024px) 300px, 55vw" className="object-cover" /></div>
+              <div className="relative col-span-2 aspect-square overflow-hidden rounded-2xl"><Image src="/images/nutrition/breakfast-editorial.webp" alt={t.photos.breakfast} fill sizes="(min-width: 1024px) 200px, 35vw" className="object-cover" /></div>
+              <div className="relative col-span-2 aspect-square overflow-hidden rounded-2xl"><Image src="/images/nutrition/fruit-editorial.webp" alt={t.photos.fruit} fill sizes="(min-width: 1024px) 200px, 35vw" className="object-cover" /></div>
+              <div className="relative col-span-5 h-32 overflow-hidden rounded-2xl md:h-40"><Image src="/images/nutrition/vegetable-tart-editorial.webp" alt={t.photos.tart} fill sizes="(min-width: 1024px) 500px, 90vw" className="object-cover object-[center_45%]" /></div>
             </div>
             <div className="space-y-6 text-base leading-relaxed md:text-lg">{t.approach.map(p => <p key={p}>{p}</p>)}</div>
           </div>
@@ -66,7 +66,7 @@ export default function NutritionSection({ lang }: { lang: "es" | "en" }) {
         </div>
 
         <div className="relative my-16 overflow-hidden rounded-[50%_10%_50%_10%/8%_8%_8%_8%] py-14 md:my-20 md:py-20">
-          <Image src="/images/nutrition/vegetables.webp" alt="" fill sizes="100vw" className="object-cover" />
+          <Image src="/images/nutrition/vegetables-editorial.webp" alt="" fill sizes="100vw" className="object-cover" />
           <div className="absolute inset-0 bg-[#38291e]/70" />
           <div className="relative mx-auto max-w-5xl space-y-4 px-6 text-center text-white">
             <p className="font-serif text-3xl italic leading-snug md:text-4xl">{t.realFood}</p>
