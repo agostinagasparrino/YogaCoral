@@ -63,7 +63,7 @@ export default function Hero({
       service: nutritionServices[contentLang],
     },
   ];
-  const actionClass = "group w-full items-center justify-between gap-3 bg-[#263e3b]/55 border border-white/40 hover:border-white hover:bg-[#263e3b]/75 text-white pl-5 pr-2 py-2 rounded-full motion-safe:transition-colors duration-300 backdrop-blur-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white";
+  const actionClass = "group w-full items-center justify-between gap-3 bg-white/5 border border-white/30 hover:border-white hover:bg-white/10 text-white pl-5 pr-2 py-2 rounded-full motion-safe:transition-colors duration-300 backdrop-blur-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white";
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
@@ -156,10 +156,10 @@ export default function Hero({
               <p className="mb-6 max-w-sm text-lg leading-relaxed text-white/90 md:hidden">
                 {isSpanish ? "Yoga y nutrición para sentirte bien." : "Yoga and nutrition to help you feel good."}
               </p>
-              <div className="grid w-full max-w-sm grid-cols-1 gap-4 md:max-w-none md:grid-cols-2 md:gap-10">
+              <div className="grid w-full max-w-sm grid-cols-1 gap-4 md:max-w-none md:grid-cols-2 md:gap-12">
                 {actions.map((action, index) => (
-                  <div key={action.target} className={`flex min-w-0 flex-col ${index === 1 ? "md:relative md:before:absolute md:before:-left-5 md:before:inset-y-0 md:before:border-l md:before:border-white/30" : ""}`}>
-                    <h2 style={{ fontFamily: "inherit", fontWeight: 600 }} className="mb-4 hidden text-lg uppercase tracking-[0.15em] text-white md:block">
+                  <div key={action.target} className={`flex min-w-0 flex-col ${index === 1 ? "md:relative md:before:absolute md:before:-left-6 md:before:inset-y-0 md:before:border-l md:before:border-white/30" : ""}`}>
+                    <h2 style={{ fontFamily: "inherit", fontWeight: 600 }} className="mb-5 hidden text-[1.375rem] uppercase tracking-[0.18em] text-white md:block">
                       {action.title}
                     </h2>
                     <p className="mb-6 hidden text-base font-medium leading-relaxed text-white/90 md:block">
