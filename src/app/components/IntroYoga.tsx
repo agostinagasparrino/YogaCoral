@@ -47,7 +47,7 @@ export default function IntroYoga({ lang = "en" }: { lang?: string }) {
           transition={{ duration: 1.2 }}
           className="absolute top-0 right-0 pointer-events-none"
         ></motion.div>
-  
+
         <div className="relative max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-0 border border-gray-200 bg-white shadow-xl overflow-hidden rounded-2xl">
             <motion.div
@@ -65,7 +65,7 @@ export default function IntroYoga({ lang = "en" }: { lang?: string }) {
                 className="object-cover contrast-125"
               />
             </motion.div>
-  
+
             <motion.div
               initial={{ opacity: 0, x: 45 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -86,7 +86,7 @@ export default function IntroYoga({ lang = "en" }: { lang?: string }) {
                     {t.badge}
                   </span>
                 </motion.div>
-  
+
                 <motion.h2
                   id="about-title"
                   initial={{ opacity: 0, y: 22 }}
@@ -98,7 +98,7 @@ export default function IntroYoga({ lang = "en" }: { lang?: string }) {
                   {t.title}
                   <span className="mt-3 block text-xl font-normal leading-relaxed text-[#8e735b] md:text-2xl">{t.subtitle}</span>
                 </motion.h2>
-  
+
                 <div className="space-y-6">
                   {t.paragraphs.map((text, i) => (
                     <motion.p
