@@ -48,8 +48,8 @@ export default function Hero({
   const actions = [
     {
       title: "Yoga",
-      label: buttonText,
-      mobileLabel: isSpanish ? "Agenda de clases" : "Class schedule",
+      label: isSpanish ? "Agenda de clases" : "Book a class",
+      mobileLabel: buttonText,
       description, target: "classes", service: defaultService,
     },
     {
