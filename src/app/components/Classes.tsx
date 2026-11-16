@@ -27,7 +27,8 @@ export default function Classes({ lang = "en" }: { lang?: string }) {
 
   return (
     <div
-      className="relative bg-[#f6f4f0] bg-cover bg-center bg-no-repeat py-16 px-6 text-center"
+      id="classes"
+      className="scroll-mt-28 relative bg-[#f6f4f0] bg-cover bg-center bg-no-repeat py-16 px-6 text-center"
     >
       <motion.div {...fadeInUp}>
         <div className="relative z-10 max-w-5xl mx-auto">
