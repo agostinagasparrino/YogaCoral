@@ -135,11 +135,11 @@ export default function Hero({
         )}
 
         {/* CONTENT */}
-        <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 sm:px-10 md:px-16 pt-32 pb-16">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-16 items-center">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 md:px-16 pt-32 pb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
             {/* TITLE */}
-            <div className="lg:col-span-5 xl:col-span-4">
+            <div className="lg:col-span-5">
               <h1 className="text-[clamp(2.5rem,10vw,4.75rem)] font-extrabold leading-[0.9] tracking-tight text-white mb-6 md:mb-0">
                 <span className="block md:hidden">
                   {title.replace("\n", " ")}
@@ -151,15 +151,15 @@ export default function Hero({
             </div>
 
             {/* TEXT + CTA */}
-            <div className="lg:col-span-7 xl:col-span-8 flex flex-col">
+            <div className="lg:col-span-7 flex flex-col">
 
               <p className="mb-6 max-w-sm text-lg leading-relaxed text-white/90 md:hidden">
                 {isSpanish ? "Yoga y nutrición para sentirte bien." : "Yoga and nutrition to help you feel good."}
               </p>
-              <div className="grid w-full max-w-sm grid-cols-1 gap-4 md:max-w-none md:grid-cols-2 md:gap-16 xl:gap-24">
+              <div className="grid w-full max-w-sm grid-cols-1 gap-4 md:max-w-none md:grid-cols-2 md:gap-12">
                 {actions.map((action, index) => (
-                  <div key={action.target} className={`flex min-w-0 flex-col ${index === 1 ? "md:relative md:before:absolute md:before:-left-8 xl:before:-left-12 md:before:inset-y-0 md:before:border-l md:before:border-white/30" : ""}`}>
-                    <h2 style={{ fontFamily: "inherit", fontWeight: 600 }} className="mb-5 hidden text-[1.375rem] uppercase tracking-[0.18em] text-white md:block">
+                  <div key={action.target} className={`flex min-w-0 flex-col ${index === 1 ? "md:relative md:before:absolute md:before:-left-6 md:before:inset-y-0 md:before:border-l md:before:border-white/30" : ""}`}>
+                    <h2 style={{ fontFamily: "inherit", fontWeight: 600, letterSpacing: "0.2em" }} className="mb-5 hidden text-[1.375rem] uppercase tracking-[0.18em] text-white md:block">
                       {action.title}
                     </h2>
                     <p className="mb-6 hidden text-base font-medium leading-relaxed text-white/90 md:block">
