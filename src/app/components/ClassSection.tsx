@@ -2,6 +2,7 @@
 "use client";
 
 import { ReactNode, useState } from "react";
+import { ArrowRight } from "lucide-react";
 import ContactModal from "@/app/components/ContactModal";
 
 type Lang = "en" | "es";
@@ -37,9 +38,9 @@ export default function ClassSection({
   const t = content[selectedLang];
 
   return (
-    <section id={id} className="py-20 px-6 bg-white overflow-hidden">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center justify-items-center">
+    <section id={id} lang={selectedLang} aria-labelledby={`${id}-title`} className="scroll-mt-28 overflow-hidden bg-[#fdfbf9] py-20 text-[#69483e] md:py-28">
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center justify-items-center">
           
           {/* TEXTO */}
           <div
@@ -49,28 +50,27 @@ export default function ClassSection({
               ${reverse ? "lg:order-2" : "lg:order-1"}
             `}
           >
-            <div className="inline-flex items-center justify-center p-2 rounded-full bg-[#d7bdb3]/10 text-[#d7bdb3]">
+            <div className="inline-flex items-center justify-center rounded-full bg-[#f4eae3] p-3 text-[#985f43]">
               {icon}
             </div>
 
-            <h2 className="text-4xl md:text-5xl font-serif text-neutral-800 leading-tight">
+            <h2 id={`${id}-title`} style={{ fontFamily: "Georgia, serif", fontWeight: 400 }} className="text-4xl leading-tight md:text-5xl">
               {t.title}
             </h2>
 
-            <div className="space-y-4 text-neutral-600 text-lg leading-relaxed">
+            <div className="space-y-6 text-base leading-relaxed md:text-lg">
               <p>{t.p1}</p>
 
-              <p className="relative inline-block">
-                {t.p2}
-                <span className="absolute bottom-1 left-0 w-full h-[6px] bg-[#d7bdb3]/20 -z-10" />
-              </p>
+              <p>{t.p2}</p>
             </div>
 
             <button
+              type="button"
               onClick={() => setIsModalOpen(true)}
-              className="mt-4 bg-[#8e735b] text-white px-8 py-3 rounded-full font-medium hover:bg-[#7a624e] transition-all transform hover:scale-105 shadow-md cursor-pointer"
+              className="mt-4 inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-[#985f43] bg-[#985f43] px-6 py-3 text-sm font-medium text-white motion-safe:transition-colors hover:bg-[#78452e] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#985f43]"
             >
               {t.button}
+              <ArrowRight size={18} aria-hidden="true" />
             </button>
           </div>
 
@@ -82,19 +82,19 @@ export default function ClassSection({
               ${reverse ? "lg:order-1" : "lg:order-2"}
             `}
           >
-            <div className="relative group overflow-hidden rounded-3xl aspect-[4/5] shadow-xl bg-neutral-100 w-full max-w-[420px]">
+            <div className="relative overflow-hidden rounded-t-[48%] rounded-b-3xl aspect-[4/5] bg-[#eee3d8] w-full max-w-[440px]">
               <video
                 autoPlay
                 loop
                 muted
                 playsInline
                 preload="metadata"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="absolute inset-0 h-full w-full object-cover"
               >
                 <source src={videoSrc} type="video/mp4" />
               </video>
 
-              <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors" />
+              <div className="pointer-events-none absolute inset-0 bg-black/5" />
             </div>
           </div>
         </div>

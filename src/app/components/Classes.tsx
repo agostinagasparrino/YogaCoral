@@ -28,26 +28,26 @@ export default function Classes({ lang = "en" }: { lang?: string }) {
   return (
     <div
       id="classes"
-      className="scroll-mt-28 relative bg-[#f6f4f0] bg-cover bg-center bg-no-repeat py-16 px-6 text-center"
+      className="scroll-mt-28 relative bg-[#fdfbf9] bg-cover bg-center bg-no-repeat py-16 px-6 text-center"
     >
       <motion.div {...fadeInUp}>
         <div className="relative z-10 max-w-5xl mx-auto">
           {/* Título: Estilo "Etiqueta" (Eyebrow) */}
-          <h2 className="text-[#d7bdb3] text-xs md:text-sm font-title mb-3 tracking-[0.2em] uppercase">
+          <h2 className="text-[#985f43] text-xs md:text-sm font-title mb-3 tracking-[0.2em] uppercase">
             {t.eyebrow}
           </h2>
 
           {/* Párrafo: Frase de impacto */}
-          <p className="max-w-2xl mx-auto leading-snug font-body font-medium text-[#8e735b] text-3xl md:text-4xl">
+          <p style={{ fontFamily: "Georgia, serif" }} className="max-w-2xl mx-auto leading-snug font-normal italic text-[#69483e] text-3xl md:text-4xl">
             {t.headline}
           </p>
 
           <div className="mt-10 flex items-center justify-center gap-4">
             {/* Línea Izquierda */}
-            <div className="h-px w-24 md:w-48 bg-[#d7bdb3]/50" />
+            <div className="h-px w-24 md:w-48 bg-[#985f43]/30" />
 
             {/* Icono de Coral */}
-            <div className="text-[#d7bdb3]">
+            <div className="text-[#985f43]">
               <svg
                 viewBox="0 0 24 24"
                 width="40"
@@ -68,7 +68,7 @@ export default function Classes({ lang = "en" }: { lang?: string }) {
             </div>
 
             {/* Línea Derecha */}
-            <div className="h-px w-24 md:w-48 bg-[#d7bdb3]/50" />
+            <div className="h-px w-24 md:w-48 bg-[#985f43]/30" />
           </div>
         </div>
       </motion.div>
