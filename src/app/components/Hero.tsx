@@ -5,6 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import ContactModal from "@/app/components/ContactModal";
+import { ArrowRight } from "lucide-react";
+import { nutritionContent, nutritionServices } from "./nutritionContent";
+
+const nutritionOptions = {
+  es: [nutritionServices.es, ...nutritionContent.es.consultations],
+  en: [nutritionServices.en, ...nutritionContent.en.consultations],
+};
 
 type HeroProps = {
   title: string;
@@ -23,7 +30,6 @@ export default function Hero({
   title,
   description,
   buttonText = "Contactanos",
-  buttonColor = "bg-coral hover:bg-coral/90",
   mediaType,
   mediaSrc,
   overlayOpacity = "bg-black/30",
@@ -32,11 +38,25 @@ export default function Hero({
   defaultService = "Seleccionar servicio",
 }: HeroProps) {
   const [contactOpen, setContactOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState(defaultService);
   const [isMobile, setIsMobile] = useState(false);
 
   const searchParams = useSearchParams();
   const lang = searchParams.get("lang") || "en";
   const isSpanish = lang === "es";
+  const contentLang = isSpanish ? "es" : "en";
+  const actions = [
+    { label: buttonText, description, target: "classes", service: defaultService },
+    {
+      label: isSpanish ? "Info nutrición" : "Nutrition info",
+      description: isSpanish
+        ? "Nutrición personalizada para cuidar tu cuerpo, potenciar tu energía y crear hábitos sostenibles."
+        : "Personalised nutrition to care for your body, boost your energy and build sustainable habits.",
+      target: "nutrition",
+      service: nutritionServices[contentLang],
+    },
+  ];
+  const actionClass = "group w-fit max-w-full items-center gap-4 bg-transparent border border-white/30 hover:border-white text-white pl-6 pr-2 py-2 rounded-full motion-safe:transition-colors duration-300 backdrop-blur-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white";
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
@@ -126,37 +146,34 @@ export default function Hero({
             {/* TEXT + CTA */}
             <div className="lg:col-span-4 flex flex-col">
 
-              {/* DESCRIPTION */}
-              <p className="text-base sm:text-lg text-white/80 leading-relaxed border-l-2 border-white/20 pl-6 font-medium mb-8 md:mb-6">
-                {description}
-              </p>
-
-              {/* CTA separado tipo editorial */}
-              <div className="mt-6 md:mt-0">
-                <button
-                  onClick={() => setContactOpen(true)}
-                  className="group w-fit flex items-center gap-6 bg-transparent border border-white/30 hover:border-white text-white pl-8 pr-2 py-2 rounded-full transition-all duration-300 backdrop-blur-sm"
-                >
-                  <span className="text-sm font-bold uppercase tracking-widest">
-                    {buttonText}
-                  </span>
-
-                  <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-black group-hover:bg-coral group-hover:text-white transition-colors duration-300">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <line x1="5" y1="12" x2="19" y2="12"></line>
-                      <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                  </div>
-                </button>
+              <div className="mt-6 flex flex-col items-start gap-8 md:mt-0">
+                {actions.map((action) => {
+                  const label = (
+                    <>
+                      <span className="text-sm font-bold uppercase tracking-widest">{action.label}</span>
+                      <span aria-hidden="true" className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-black">
+                        <ArrowRight size={20} strokeWidth={2.5} />
+                      </span>
+                    </>
+                  );
+                  return (
+                    <div key={action.target} className="max-w-full">
+                      <p className="mb-6 border-l-2 border-white/20 pl-6 text-base font-medium leading-relaxed text-white/80 sm:text-lg">
+                        {action.description}
+                      </p>
+                      <a href={`#${action.target}`} className={`flex md:hidden ${actionClass}`}>
+                        {label}
+                      </a>
+                      <button
+                        type="button"
+                        onClick={() => { setSelectedService(action.service); setContactOpen(true); }}
+                        className={`hidden md:flex ${actionClass}`}
+                      >
+                        {label}
+                      </button>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -167,7 +184,8 @@ export default function Hero({
         open={contactOpen}
         onClose={() => setContactOpen(false)}
         lang={lang}
-        defaultService={defaultService}
+        defaultService={selectedService}
+        serviceOptions={selectedService === nutritionServices[contentLang] ? nutritionOptions[contentLang] : undefined}
       />
     </>
   );
