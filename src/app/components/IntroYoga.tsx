@@ -10,7 +10,7 @@ const content = {
     title: "I'm Natalia",
     subtitle: "nutritionist certified in Malta and the European Union",
     paragraphs: [
-      "I am Natalia, a nutritionist certified in Malta and the European Union, specialising in Nutrition for Sport and Physical Activity, with a holistic and ancestral perspective.",
+      "Specialising in Nutrition for Sport and Physical Activity, with a holistic and ancestral perspective.",
       "My approach integrates nutritional science, mindful eating and the importance of movement as fundamental pillars of health and wellbeing.",
       "I believe there is no ideal diet for everyone. We are all unique and one of a kind, with different needs, histories and goals. That is why I believe nutrition should be adapted to each person, respecting their individuality, lifestyle and physical activity.",
       "My purpose is to support you in building a healthy relationship with food, learning to listen to your body and discovering how to nourish it so you can feel better, boost your energy and reach your goals.",
@@ -23,7 +23,7 @@ const content = {
     title: "Soy Natalia",
     subtitle: "nutricionista certificada en Malta y la Unión Europea",
     paragraphs: [
-      "Soy Natalia, nutricionista certificada en Malta y la Unión Europea, especializada en Nutrición para el Deporte y la Actividad Física, con orientación holistica y ancestral.",
+      "Especializada en Nutrición para el Deporte y la Actividad Física, con orientación holistica y ancestral.",
       "Mi enfoque integra la ciencia de la nutrición, la alimentación consciente y la importancia del movimiento como pilares fundamentales para la salud y el bienestar.",
       "Creo que no existe una dieta ideal para todos. Somos seres únicos e irrepetibles, con necesidades, historias y objetivos diferentes. Por eso, considero que la alimentación debe adaptarse a cada persona, respetando su individualidad, estilo de vida y actividad física.",
       "Mi propósito es acompañarte a construir una relación saludable con la comida, aprender a escuchar tu cuerpo y descubrir cómo nutrirlo para sentirte mejor, potenciar tu energía y alcanzar tus objetivos.",
