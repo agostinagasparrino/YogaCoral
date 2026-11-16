@@ -46,9 +46,16 @@ export default function Hero({
   const isSpanish = lang === "es";
   const contentLang = isSpanish ? "es" : "en";
   const actions = [
-    { label: buttonText, description, target: "classes", service: defaultService },
     {
+      title: "Yoga",
+      label: isSpanish ? "Agenda de clases" : "Book a class",
+      mobileLabel: buttonText,
+      description, target: "classes", service: defaultService,
+    },
+    {
+      title: isSpanish ? "Nutrición" : "Nutrition",
       label: isSpanish ? "Info nutrición" : "Nutrition info",
+      mobileLabel: isSpanish ? "Info nutrición" : "Nutrition info",
       description: isSpanish
         ? "Nutrición personalizada para cuidar tu cuerpo, potenciar tu energía y crear hábitos sostenibles."
         : "Personalised nutrition to care for your body, boost your energy and build sustainable habits.",
@@ -56,7 +63,7 @@ export default function Hero({
       service: nutritionServices[contentLang],
     },
   ];
-  const actionClass = "group w-fit max-w-full items-center gap-4 bg-transparent border border-white/30 hover:border-white text-white pl-6 pr-2 py-2 rounded-full motion-safe:transition-colors duration-300 backdrop-blur-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white";
+  const actionClass = "group w-full items-center justify-between gap-3 bg-white/5 border border-white/30 hover:border-white hover:bg-white/10 text-white pl-5 pr-2 py-2 rounded-full motion-safe:transition-colors duration-300 backdrop-blur-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white";
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
@@ -67,7 +74,7 @@ export default function Hero({
 
   return (
     <>
-      <section className="relative overflow-hidden min-h-screen flex items-center justify-center">
+      <section id="top" className="relative overflow-hidden min-h-screen flex items-center justify-center">
 
         {/* LANGUAGE */}
         <div className="hidden xl:flex absolute top-10 right-10 z-50 gap-3 text-sm font-bold">
@@ -129,11 +136,11 @@ export default function Hero({
 
         {/* CONTENT */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 md:px-16 pt-32 pb-16">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center lg:items-end">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
             {/* TITLE */}
-            <div className="lg:col-span-8">
-              <h1 className="text-[clamp(2.5rem,10vw,6.5rem)] font-extrabold leading-[0.9] tracking-tight text-white mb-6 md:mb-0">
+            <div className="lg:col-span-5">
+              <h1 className="text-[clamp(2.5rem,10vw,4.75rem)] font-extrabold leading-[0.9] tracking-tight text-white mb-6 md:mb-0">
                 <span className="block md:hidden">
                   {title.replace("\n", " ")}
                 </span>
@@ -144,36 +151,38 @@ export default function Hero({
             </div>
 
             {/* TEXT + CTA */}
-            <div className="lg:col-span-4 flex flex-col">
+            <div className="lg:col-span-7 flex flex-col">
 
-              <div className="mt-6 flex flex-col items-start gap-8 md:mt-0">
-                {actions.map((action) => {
-                  const label = (
-                    <>
-                      <span className="text-sm font-bold uppercase tracking-widest">{action.label}</span>
-                      <span aria-hidden="true" className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-black">
+              <p className="mb-6 max-w-sm text-lg leading-relaxed text-white/90 md:hidden">
+                {isSpanish ? "Yoga y nutrición para sentirte bien." : "Yoga and nutrition to help you feel good."}
+              </p>
+              <div className="grid w-full max-w-sm grid-cols-1 gap-4 md:max-w-none md:grid-cols-2 md:gap-12">
+                {actions.map((action, index) => (
+                  <div key={action.target} className={`flex min-w-0 flex-col ${index === 1 ? "md:relative md:before:absolute md:before:-left-6 md:before:inset-y-0 md:before:border-l md:before:border-white/30" : ""}`}>
+                    <h2 style={{ fontFamily: "inherit", fontWeight: 600 }} className="mb-5 hidden text-[1.375rem] uppercase tracking-[0.18em] text-white md:block">
+                      {action.title}
+                    </h2>
+                    <p className="mb-6 hidden text-base font-medium leading-relaxed text-white/90 md:block">
+                      {action.description}
+                    </p>
+                    <a href={`#${action.target}`} className={`flex md:hidden ${actionClass}`}>
+                      <span className="text-xs font-bold uppercase tracking-wider">{action.mobileLabel}</span>
+                      <span aria-hidden="true" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-black">
                         <ArrowRight size={20} strokeWidth={2.5} />
                       </span>
-                    </>
-                  );
-                  return (
-                    <div key={action.target} className="max-w-full">
-                      <p className="mb-6 border-l-2 border-white/20 pl-6 text-base font-medium leading-relaxed text-white/80 sm:text-lg">
-                        {action.description}
-                      </p>
-                      <a href={`#${action.target}`} className={`flex md:hidden ${actionClass}`}>
-                        {label}
-                      </a>
-                      <button
-                        type="button"
-                        onClick={() => { setSelectedService(action.service); setContactOpen(true); }}
-                        className={`hidden md:flex ${actionClass}`}
-                      >
-                        {label}
-                      </button>
-                    </div>
-                  );
-                })}
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => { setSelectedService(action.service); setContactOpen(true); }}
+                      className={`mt-auto hidden md:flex ${actionClass}`}
+                    >
+                      <span className="text-xs font-bold uppercase tracking-wider">{action.label}</span>
+                      <span aria-hidden="true" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-black">
+                        <ArrowRight size={20} strokeWidth={2.5} />
+                      </span>
+                    </button>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

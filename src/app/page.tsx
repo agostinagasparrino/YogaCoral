@@ -1,3 +1,4 @@
+import BackToTop from "./components/BackToTop";
 import NutritionSection from "./components/NutritionSection";
 import GroupClasses from "./components/GroupClasses";
 import Hero from "./components/Hero";
@@ -58,6 +59,7 @@ export default async function Home({
       <NutritionSection lang={lang} />
       <VideosCarousel />
       <Footer />
+      <BackToTop lang={lang} />
     </>
   );
 }
