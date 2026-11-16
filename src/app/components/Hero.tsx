@@ -139,7 +139,7 @@ export default function Hero({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-16 items-center">
 
             {/* TITLE */}
-            <div className="lg:col-span-4">
+            <div className="lg:col-span-5 xl:col-span-4">
               <h1 className="text-[clamp(2.5rem,10vw,4.75rem)] font-extrabold leading-[0.9] tracking-tight text-white mb-6 md:mb-0">
                 <span className="block md:hidden">
                   {title.replace("\n", " ")}
@@ -151,7 +151,7 @@ export default function Hero({
             </div>
 
             {/* TEXT + CTA */}
-            <div className="lg:col-span-8 flex flex-col">
+            <div className="lg:col-span-7 xl:col-span-8 flex flex-col">
 
               <p className="mb-6 max-w-sm text-lg leading-relaxed text-white/90 md:hidden">
                 {isSpanish ? "Yoga y nutrición para sentirte bien." : "Yoga and nutrition to help you feel good."}
