@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -39,7 +39,6 @@ export default function Hero({
 }: HeroProps) {
   const [contactOpen, setContactOpen] = useState(false);
   const [selectedService, setSelectedService] = useState(defaultService);
-  const [isMobile, setIsMobile] = useState(false);
 
   const searchParams = useSearchParams();
   const lang = searchParams.get("lang") || "en";
@@ -65,12 +64,7 @@ export default function Hero({
   ];
   const actionClass = "group w-full items-center justify-between gap-3 bg-white/5 border border-white/30 hover:border-white hover:bg-white/10 text-white pl-5 pr-2 py-2 rounded-full motion-safe:transition-colors duration-300 backdrop-blur-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white";
 
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
+
 
   return (
     <>
@@ -102,12 +96,13 @@ export default function Hero({
         </div>
 
         {/* MEDIA */}
-        {mediaType === "video" && !isMobile ? (
+        {mediaType === "video" ? (
           <video
             autoPlay
             muted
             loop
             playsInline
+            poster="/images/heroo.jpg"
             preload="auto"
             className="absolute inset-0 w-full h-full object-cover contrast-75"
           >
