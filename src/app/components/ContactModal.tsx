@@ -139,11 +139,13 @@ export default function ContactModal({
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
             className="fixed inset-0 z-[101] flex items-center justify-center p-4 pointer-events-none"
           >
-            <div className="relative w-full max-w-5xl max-h-[90vh] overflow-hidden rounded-[2.5rem] bg-white shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] pointer-events-auto flex flex-col lg:flex-row">
+            <div role="dialog" aria-modal="true" aria-labelledby="contact-dialog-title" className="relative w-full max-w-5xl max-h-[90svh] overflow-hidden rounded-[2.5rem] bg-white shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] pointer-events-auto flex flex-col lg:flex-row">
 
               <button
+                type="button"
+                aria-label={lang === "es" ? "Cerrar formulario" : "Close form"}
                 onClick={onClose}
-                className="absolute top-6 right-6 z-30 rounded-full p-2 bg-neutral-100 hover:bg-neutral-200 transition-colors cursor-pointer group"
+                className="absolute top-4 right-4 z-30 flex h-11 w-11 items-center justify-center rounded-full bg-neutral-100 hover:bg-neutral-200 transition-colors cursor-pointer group"
               >
                 <X size={20} className="text-neutral-600 group-hover:rotate-90 transition-transform duration-300" />
               </button>
@@ -178,16 +180,18 @@ export default function ContactModal({
               </div>
 
               {/* Columna Derecha */}
-              <div className="flex-1 p-8 md:p-14 overflow-y-auto">
+              <div className="min-h-0 flex-1 p-6 pt-16 sm:p-8 sm:pt-16 md:p-14 overflow-y-auto">
                 <div className="max-w-md mx-auto">
                   <header className="mb-10 text-center lg:text-left">
-                    <h3 className="text-3xl font-serif text-neutral-800 mb-2">{t.formTitle}</h3>
+                    <h3 id="contact-dialog-title" className="text-3xl font-serif text-neutral-800 mb-2">{t.formTitle}</h3>
                     <p className="text-neutral-500 text-sm">{t.formDesc}</p>
                   </header>
 
                   <div className="space-y-4">
                     <input
                       type="text"
+                      autoComplete="name"
+                      aria-label={t.nameLabel}
                       placeholder={t.nameLabel}
                       value={name}
                       onChange={(e) => { setName(e.target.value); setErrors(p => ({ ...p, name: false })); }}
@@ -196,6 +200,9 @@ export default function ContactModal({
 
                     <input
                       type="email"
+                      inputMode="email"
+                      autoComplete="email"
+                      aria-label={t.emailLabel}
                       placeholder={t.emailLabel}
                       value={email}
                       onChange={(e) => { setEmail(e.target.value); setErrors(p => ({ ...p, email: false })); }}
@@ -205,6 +212,7 @@ export default function ContactModal({
                     {/* Selector de Servicio */}
                     <div className="relative">
                       <select
+                        aria-label={t.serviceLabel}
                         value={service}
                         onChange={(e) => setService(e.target.value)}
                         className="w-full bg-neutral-50 border border-neutral-200 rounded-2xl px-5 py-4 outline-none appearance-none cursor-pointer text-neutral-800 focus:bg-white focus:ring-4 focus:ring-[#d7bdb3]/10 focus:border-[#d7bdb3]"
@@ -222,6 +230,7 @@ export default function ContactModal({
                     {/* Selector de Modalidad */}
                     <div className="relative">
                       <select
+                        aria-label={t.modeLabel}
                         value={mode}
                         onChange={(e) => setMode(e.target.value)}
                         className="w-full bg-neutral-50 border border-neutral-200 rounded-2xl px-5 py-4 outline-none appearance-none cursor-pointer text-neutral-800 focus:bg-white focus:ring-4 focus:ring-[#d7bdb3]/10 focus:border-[#d7bdb3]"
@@ -237,6 +246,7 @@ export default function ContactModal({
                     </div>
 
                     <textarea
+                      aria-label={t.messagePlaceholder}
                       rows={3}
                       placeholder={t.messagePlaceholder}
                       value={message}

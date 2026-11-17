@@ -39,39 +39,39 @@ export default function IntroYoga({ lang = "en" }: { lang?: string }) {
 
   return (
     <MotionConfig reducedMotion="user">
-      <section id="about" aria-labelledby="about-title" className="scroll-mt-28 relative bg-[#f8f9fa] text-[#1a1a1a] py-16 lg:py-24 overflow-hidden">
+      <section id="about" aria-labelledby="about-title" className="scroll-mt-28 relative bg-[#fdfbf9] text-[#69483e] py-16 lg:py-24 overflow-hidden">
         <motion.div
           initial={{ opacity: 0, rotate: 0 }}
           whileInView={{ opacity: 0.03, rotate: 12 }}
-          viewport={{ once: false }}
+          viewport={{ once: true }}
           transition={{ duration: 1.2 }}
           className="absolute top-0 right-0 pointer-events-none"
         ></motion.div>
 
         <div className="relative max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-12 gap-0 border border-gray-200 bg-white shadow-xl overflow-hidden rounded-2xl">
+          <div className="grid lg:grid-cols-12 gap-0 border border-[#eadbd0] bg-white shadow-sm overflow-hidden rounded-2xl">
             <motion.div
               initial={{ opacity: 0, x: -45 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="lg:col-span-5 relative min-h-[500px] bg-[#d7bdb3]"
+              className="lg:col-span-5 relative aspect-[4/3] sm:aspect-[3/2] lg:aspect-auto lg:min-h-[500px] bg-[#eee3d8]"
             >
               <Image
                 src="/images/nati.jpg"
                 alt="Natalia"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
-                className="object-cover contrast-125"
+                className="object-cover object-[center_60%] contrast-[0.95] saturate-[0.95] brightness-[1.03] lg:object-center"
               />
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0, x: 45 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false, amount: 0.15 }}
+              viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="lg:col-span-7 p-8 md:p-16 flex flex-col justify-center"
+              className="lg:col-span-7 p-6 sm:p-8 md:p-12 lg:p-16 flex flex-col justify-center"
             >
               <div className="space-y-8">
                 <motion.div
@@ -82,7 +82,7 @@ export default function IntroYoga({ lang = "en" }: { lang?: string }) {
                   className="flex items-center gap-3"
                 >
                   <span className="h-0.5 w-6 bg-[#d7bdb3]" />
-                  <span className="text-[#d7bdb3] font-extrabold text-xs uppercase tracking-[0.2em] font-body">
+                  <span className="text-[#985f43] font-medium text-xs uppercase tracking-[0.2em] font-body">
                     {t.badge}
                   </span>
                 </motion.div>
@@ -91,12 +91,12 @@ export default function IntroYoga({ lang = "en" }: { lang?: string }) {
                   id="about-title"
                   initial={{ opacity: 0, y: 22 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false }}
+                  viewport={{ once: true }}
                   transition={{ delay: 0.1, duration: 0.55 }}
                   className="text-4xl md:text-5xl font-title text-[#985f43] leading-[1.1] tracking-tight"
                 >
                   {t.title}
-                  <span className="mt-3 block text-xl font-normal leading-relaxed text-[#8e735b] md:text-2xl">{t.subtitle}</span>
+                  <span className="mt-3 block text-xl font-normal leading-relaxed text-[#785e4c] md:text-2xl">{t.subtitle}</span>
                 </motion.h2>
 
                 <div className="space-y-6">
@@ -105,9 +105,9 @@ export default function IntroYoga({ lang = "en" }: { lang?: string }) {
                       key={i}
                       initial={{ opacity: 0, y: 18 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: false }}
+                      viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: i * 0.1 }}
-                      className="text-lg text-gray-600 leading-relaxed max-w-xl font-body"
+                      className="text-[1.0625rem] leading-7 text-[#69483e] max-w-prose font-body md:text-lg md:leading-relaxed"
                     >
                       {text}
                     </motion.p>

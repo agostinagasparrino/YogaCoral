@@ -122,19 +122,19 @@ export default function Navbar({ lang = "en" }: { lang?: string }) {
                 {t.button}
               </button>
 
-              <button onClick={() => setMobileOpen(!mobileOpen)} className={`xl:hidden ${getColorPrimary()}`}>
+              <button type="button" aria-label={isSpanish ? (mobileOpen ? "Cerrar menú" : "Abrir menú") : (mobileOpen ? "Close menu" : "Open menu")} aria-expanded={mobileOpen} aria-controls="mobile-navigation" onClick={() => setMobileOpen(!mobileOpen)} className={`flex h-11 w-11 items-center justify-center xl:hidden ${getColorPrimary()}`}>
                 {mobileOpen ? <X size={28} /> : <Menu size={28} />}
               </button>
             </div>
           </div>
 
           {mobileOpen && (
-            <div className="xl:hidden pt-5 pb-2 border-t mt-4 space-y-4">
-              <a href="#top" onClick={() => setMobileOpen(false)} className={`block ${navLinkClass("/")}`}>{t.home}</a>
-              <a href="#about" onClick={() => setMobileOpen(false)} className={`block ${navLinkClass("/#about")}`}>{t.about}</a>
-              <a href="#private-classes" onClick={() => setMobileOpen(false)} className={`block ${navLinkClass("/#private-classes")}`}>{t.private}</a>
-              <a href="#group-classes" onClick={() => setMobileOpen(false)} className={`block ${navLinkClass("/#group-classes")}`}>{t.group}</a>
-              <a href="#nutrition" onClick={() => setMobileOpen(false)} className={`block ${navLinkClass("/#nutrition")}`}>{t.nutrition}</a>
+            <div id="mobile-navigation" className="max-h-[calc(100svh-7rem)] overflow-y-auto xl:hidden pt-5 pb-2 border-t mt-4 space-y-1">
+              <a href="#top" onClick={() => setMobileOpen(false)} className={`flex min-h-11 items-center py-2 ${navLinkClass("/")}`}>{t.home}</a>
+              <a href="#about" onClick={() => setMobileOpen(false)} className={`flex min-h-11 items-center py-2 ${navLinkClass("/#about")}`}>{t.about}</a>
+              <a href="#private-classes" onClick={() => setMobileOpen(false)} className={`flex min-h-11 items-center py-2 ${navLinkClass("/#private-classes")}`}>{t.private}</a>
+              <a href="#group-classes" onClick={() => setMobileOpen(false)} className={`flex min-h-11 items-center py-2 ${navLinkClass("/#group-classes")}`}>{t.group}</a>
+              <a href="#nutrition" onClick={() => setMobileOpen(false)} className={`flex min-h-11 items-center py-2 ${navLinkClass("/#nutrition")}`}>{t.nutrition}</a>
               <button 
                 className="w-full mt-2 bg-[#8e735b] text-white px-5 py-3 rounded-xl font-semibold" 
                 onClick={() => { setMobileOpen(false); setContactOpen(true); }}

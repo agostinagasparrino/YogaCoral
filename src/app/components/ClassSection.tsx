@@ -58,7 +58,7 @@ export default function ClassSection({
               {t.title}
             </h2>
 
-            <div className="space-y-6 text-base leading-relaxed md:text-lg">
+            <div className="space-y-6 text-[1.0625rem] leading-7 md:text-lg">
               <p>{t.p1}</p>
 
               <p>{t.p2}</p>
@@ -67,7 +67,7 @@ export default function ClassSection({
             <button
               type="button"
               onClick={() => setIsModalOpen(true)}
-              className="mt-4 inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-[#985f43] bg-[#985f43] px-6 py-3 text-sm font-medium text-white motion-safe:transition-colors hover:bg-[#78452e] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#985f43]"
+              className="mt-4 inline-flex min-h-12 w-full items-center sm:w-auto justify-center gap-3 rounded-full border border-[#985f43] bg-[#985f43] px-6 py-3 text-sm font-medium text-white motion-safe:transition-colors hover:bg-[#78452e] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#985f43]"
             >
               {t.button}
               <ArrowRight size={18} aria-hidden="true" />
