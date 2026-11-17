@@ -86,11 +86,11 @@ export default function NatiAssistant({ lang }: { lang: Lang }) {
   }
   return <>
     {!contact && <button ref={launcher} type="button" onClick={() => setOpen(value => !value)} aria-label={t.open} aria-expanded={open} aria-controls="nati-assistant" className="fixed right-4 bottom-[calc(5.25rem+env(safe-area-inset-bottom))] z-50 flex h-20 w-20 items-center justify-center rounded-full border border-[#decbbd] bg-[#fdfbf9] shadow-lg md:bottom-6 motion-safe:transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#985f43]">
-      <Image src="/images/nati-assistant.webp" alt="" width={480} height={525} className="h-auto w-[64px] object-contain" />
+      <Image src="/images/nati-assistant-standing.webp" alt="" width={427} height={640} className="h-[72px] w-auto object-contain" />
     </button>}
     {open && <section ref={panel} id="nati-assistant" role="dialog" aria-labelledby="nati-assistant-title" lang={lang} className="fixed inset-x-3 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-[90] flex max-h-[calc(100svh-2rem-env(safe-area-inset-bottom))] flex-col overflow-hidden rounded-3xl border border-[#decbbd] bg-[#fdfbf9] text-[#69483e] shadow-2xl sm:left-auto sm:right-6 sm:bottom-28 sm:w-[380px] sm:max-h-[min(640px,calc(100svh-8rem))]">
       <header className="flex shrink-0 items-center gap-3 border-b border-[#eadbd0] bg-[#f2e8df] px-4 py-3">
-        <Image src="/images/nati-assistant.webp" alt="" width={480} height={525} className="h-auto w-[38px] object-contain" />
+        <Image src="/images/nati-assistant-standing.webp" alt="" width={427} height={640} className="h-12 w-auto shrink-0 object-contain" />
         <div className="flex-1"><h2 id="nati-assistant-title" style={{fontSize: "1rem", fontWeight: 600, letterSpacing: "normal"}}>{t.title}</h2><p className="mt-1 text-xs leading-4">{t.note}</p></div>
         <button ref={closeButton} type="button" onClick={close} aria-label={t.close} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full hover:bg-[#e4d4c6]"><X size={20}/></button>
       </header>
