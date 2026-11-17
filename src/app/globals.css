@@ -42,20 +42,6 @@ h1, h2, h3 {
   scrollbar-width: none;
 }
 
-@keyframes carousel {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(calc(-50% - 12px));
-  }
-}
-
-.animate-carousel {
-  animation: carousel 35s linear infinite;
-}
-
 /* Native section links animate unless the visitor prefers reduced motion. */
 @media (prefers-reduced-motion: no-preference) {
   html {
@@ -67,3 +53,19 @@ h1, h2, h3 {
 #group-classes {
   scroll-margin-top: 7rem;
 }
+
+
+.gallery-control {
+  display: inline-flex;
+  width: 2.75rem;
+  height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #d9bdaa;
+  border-radius: 9999px;
+  color: #985f43;
+  background: #fdfbf9;
+  cursor: pointer;
+}
+.gallery-control:hover { background: #f4eae3; }
+.gallery-control:focus-visible { outline: 2px solid #985f43; outline-offset: 3px; }
