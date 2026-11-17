@@ -55,7 +55,7 @@ export default function TestimonialsSection({ lang }: { lang: "es" | "en" }) {
   return (
     <section id="experiences" lang={lang} aria-labelledby="experiences-title" className="scroll-mt-28 overflow-hidden bg-[#f4eae3] py-16 text-[#69483e] md:py-24">
       <div className="mx-auto max-w-6xl px-6 md:px-10">
-        <header className="mb-8 max-w-2xl md:mb-12">
+        <header data-scroll-reveal className="mb-8 max-w-2xl md:mb-12">
           <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-[#985f43]">{es ? "Experiencias compartidas" : "Shared experiences"}</p>
           <h2 id="experiences-title" style={{ fontFamily: "Georgia, serif", fontWeight: 400 }} className="text-4xl leading-tight md:text-5xl">{es ? "Un espacio para conectar" : "A space to connect"}</h2>
           <p className="mt-5 text-[1.0625rem] leading-7">{es ? "Palabras de quienes compartieron conmigo su práctica y su camino de bienestar." : "Words from those who have shared their practice and wellbeing journey with me."}</p>
@@ -65,7 +65,7 @@ export default function TestimonialsSection({ lang }: { lang: "es" | "en" }) {
         </div>
         <p role="status" className="sr-only">{visibleReviews.length} {es ? "opiniones" : "reviews"}</p>
         <p id="experiences-hint" className="mb-4 text-sm text-[#785e4c] md:hidden">{es ? "Deslizá para conocer más experiencias →" : "Swipe to explore more experiences →"}</p>
-        <div key={filter} ref={track} id="experiences-track" onScroll={updateEdges} role="region" aria-label={es ? "Comentarios y puntuaciones" : "Reviews and ratings"} aria-describedby="experiences-hint" tabIndex={0} className="snap-x snap-mandatory overflow-x-auto overscroll-x-contain rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#985f43]">
+        <div data-scroll-reveal key={filter} ref={track} id="experiences-track" onScroll={updateEdges} role="region" aria-label={es ? "Comentarios y puntuaciones" : "Reviews and ratings"} aria-describedby="experiences-hint" tabIndex={0} className="snap-x snap-mandatory overflow-x-auto overscroll-x-contain rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#985f43]">
           <ul className="flex gap-4 pb-4">
             {visibleReviews.map(item => (
               <li key={item.name} className="flex w-[88%] shrink-0 snap-start flex-col rounded-2xl border border-[#eadbd0] bg-[#fdfbf9] p-6 md:w-[calc((100%-1rem)/2)] md:p-7 lg:w-[calc((100%-2rem)/3)]">

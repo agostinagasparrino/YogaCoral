@@ -4,7 +4,6 @@ import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Send, X, ArrowLeft } from "lucide-react";
-import ContactModal from "./ContactModal";
 import { nutritionServices } from "./nutritionContent";
 
 type Lang = "es" | "en";
@@ -18,8 +17,9 @@ const copy = {
     groupInfo: "Conocé las clases grupales y encontrá la información para compartir tu práctica. Nati puede ayudarte a coordinar tu próxima clase.",
     nutritionInfo: "Un enfoque personalizado basado en alimentos reales, movimiento y hábitos sostenibles. Conocé la propuesta o prepará tu consulta nutricional.",
     section: "Ir a la sección", question: "¿Sobre qué te gustaría consultar?", goal: "¿Qué te gustaría contarle a Nati?", placeholder: "Por ejemplo: quiero empezar yoga…",
-    draft: "Con esto podemos preparar tu mensaje. En el formulario vas a poder revisarlo, completar tus datos y elegir la modalidad antes de abrir WhatsApp.",
-    review: "Revisar mi consulta", send: "Enviar al asistente", input: "Escribí tu pregunta", fallback: "Puedo orientarte sobre las secciones de la web. Para horarios, precios o una consulta personal, preparemos un mensaje para Nati.",
+    draft: "Tu mensaje está listo. Abrí WhatsApp para continuar la conversación con Nati.",
+    wpGreeting: "¡Hola Nati! cómo estás??", wpService: "Servicio", wpMessage: "Consulta", wpGeneral: "Consulta General",
+    review: "Enviar por WhatsApp", send: "Enviar al asistente", input: "Escribí tu pregunta", fallback: "Puedo orientarte sobre las secciones de la web. Para horarios, precios o una consulta personal, preparemos un mensaje para Nati.",
     note: "Guía de la web · No es una conversación con Nati", greeting: "Me gustaría consultar sobre", saved: "Tu consulta", required: "Escribí unas palabras para continuar.",
   },
   en: {
@@ -30,8 +30,9 @@ const copy = {
     groupInfo: "Explore group classes and find information about sharing your practice. Nati can help you arrange your next class.",
     nutritionInfo: "A personalized approach based on real food, movement and sustainable habits. Explore the approach or prepare your nutrition inquiry.",
     section: "Explore this section", question: "What would you like to ask about?", goal: "What would you like to tell Nati?", placeholder: "For example: I’d like to start yoga…",
-    draft: "We can use this to prepare your message. In the form you can review it, add your details and choose a modality before opening WhatsApp.",
-    review: "Review my inquiry", send: "Send to assistant", input: "Type your question", fallback: "I can guide you through the website. For schedules, prices or a personal question, let’s prepare a message for Nati.",
+    draft: "Your message is ready. Open WhatsApp to continue the conversation with Nati.",
+    wpGreeting: "Hi Nati! how are you??", wpService: "Service", wpMessage: "Inquiry", wpGeneral: "General Inquiry",
+    review: "Send via WhatsApp", send: "Send to assistant", input: "Type your question", fallback: "I can guide you through the website. For schedules, prices or a personal question, let’s prepare a message for Nati.",
     note: "Website guide · You are not chatting with Nati", greeting: "I’d like to ask about", saved: "Your inquiry", required: "Write a few words to continue.",
   },
 };
@@ -47,7 +48,6 @@ export default function NatiAssistant({ lang }: { lang: Lang }) {
   const [input, setInput] = useState("");
   const [detail, setDetail] = useState("");
   const [error, setError] = useState(false);
-  const [contact, setContact] = useState(false);
   const launcher = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLElement>(null);
   const closeButton = useRef<HTMLButtonElement>(null);
@@ -57,6 +57,8 @@ export default function NatiAssistant({ lang }: { lang: Lang }) {
     group: lang === "es" ? "Clases Grupales" : "Group Classes",
     nutrition: nutritionServices[lang],
   };
+  const whatsappMessage = `${t.wpGreeting}\n\n${t.wpService}: ${topic ? services[topic] : t.wpGeneral}\n\n${t.wpMessage}: ${detail}`;
+  const whatsappUrl = `https://wa.me/35677146309?text=${encodeURIComponent(whatsappMessage)}`;
   function close() { setOpen(false); launcher.current?.focus(); }
   useEffect(() => {
     const hero = document.getElementById("top");
@@ -99,7 +101,7 @@ export default function NatiAssistant({ lang }: { lang: Lang }) {
   }
   return <>
     <AnimatePresence>
-      {pastHero && !contact && <motion.div
+      {pastHero && <motion.div
         key="nati-launcher"
         initial={{ opacity: 0, y: reduceMotion ? 0 : 16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -126,11 +128,10 @@ export default function NatiAssistant({ lang }: { lang: Lang }) {
         <div aria-live="polite" aria-atomic="true"><p>{step === "home" ? t.intro : step === "topic" && topic ? t[`${topic}Info`] : step === "choose" ? t.question : step === "goal" ? t.goal : step === "review" ? t.draft : t.fallback}</p></div>
         {(step === "home" || step === "choose") && <div className="mt-5 grid gap-2">{(["private", "group", "nutrition"] as Topic[]).map(value => <button type="button" key={value} className={button} onClick={() => choose(value)}>{t[value]}</button>)}{step === "home" && <button type="button" className={`${button} bg-[#985f43] text-white hover:bg-[#78452e]`} onClick={() => setStep("choose")}>{t.consult}</button>}</div>}
         {step === "topic" && topic && <div className="mt-5 grid gap-2"><button type="button" className={button} onClick={() => { const target = document.getElementById(ids[topic]); close(); target?.scrollIntoView({behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth"}); }}>{t.section}</button><button type="button" className={button} onClick={() => {setStep("goal");setInput("");}}>{t.consult}</button></div>}
-        {step === "review" && <p className="mt-4 whitespace-pre-wrap break-words rounded-2xl bg-[#f2e8df] p-4"><strong>{t.saved}</strong><br/>{topic ? `${t.greeting}: ${services[topic]}.\n\n` : ""}{detail}</p>}
-        {(step === "review" || step === "fallback") && <button type="button" className={`${button} mt-5 w-full bg-[#985f43] text-white hover:bg-[#78452e]`} onClick={() => {setOpen(false);setContact(true);}}>{t.review}</button>}
+        {(step === "review" || step === "fallback") && <p className="mt-4 whitespace-pre-wrap break-words rounded-2xl bg-[#f2e8df] p-4"><strong>{t.saved}</strong><br/>{whatsappMessage}</p>}
+        {(step === "review" || step === "fallback") && <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className={`${button} mt-5 block w-full bg-[#985f43] text-center text-white hover:bg-[#78452e]`}>{t.review}</a>}
         {step !== "review" && step !== "choose" && <form onSubmit={submit} className="mt-5"><label htmlFor="nati-question" className="mb-2 block text-sm">{step === "goal" ? t.goal : t.input}</label><div className="flex gap-2"><input id="nati-question" maxLength={1500} value={input} onChange={e => setInput(e.target.value)} placeholder={step === "goal" ? t.placeholder : t.input} aria-invalid={error} aria-describedby={error ? "nati-input-error" : undefined} className="min-h-12 min-w-0 flex-1 rounded-2xl border border-[#decbbd] bg-white px-3 text-base focus:outline-2 focus:outline-[#985f43]"/><button type="submit" aria-label={t.send} className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#985f43] text-white"><Send size={18}/></button></div>{error && <p id="nati-input-error" role="alert" className="mt-2 text-sm">{t.required}</p>}</form>}
       </div>
     </section>}
-    {contact && <ContactModal open onClose={() => {setContact(false);setOpen(true);}} lang={lang} defaultService={topic ? services[topic] : undefined} defaultMessage={detail}/>}
   </>;
 }

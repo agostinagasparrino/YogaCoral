@@ -40,7 +40,7 @@ const yogaBio = {
     title: "I'm Natalia",
     subtitle: "your yoga teacher",
     paragraphs: [
-      "My journey with yoga began over 4 years ago as a personal search for physical and mental well-being. Over time, it became my lifestyle and my passion: guiding others to reconnect with themselves.",
+      "My journey with yoga began over 5 years ago as a personal search for physical and mental well-being. Over time, it became my lifestyle and my passion: guiding others to reconnect with themselves.",
       "My classes combine mindful movement, breath, and presence. I believe in an accessible, loving, and transformative yoga practice.",
     ],
   },
@@ -49,7 +49,7 @@ const yogaBio = {
     title: "Soy Natalia",
     subtitle: "tu profesora de yoga",
     paragraphs: [
-      "Mi camino en el yoga comenzó hace más de 4 años como una búsqueda personal de bienestar físico y mental. Con el tiempo, se convirtió en mi estilo de vida y mi pasión: guiar a otros a reconectar consigo mismos.",
+      "Mi camino en el yoga comenzó hace más de 5 años como una búsqueda personal de bienestar físico y mental. Con el tiempo, se convirtió en mi estilo de vida y mi pasión: guiar a otros a reconectar consigo mismos.",
       "Mis clases combinan movimiento consciente, respiración y presencia. Creo en una práctica de yoga accesible, amorosa y transformadora.",
     ],
   },
@@ -85,10 +85,10 @@ export default function IntroYoga({ lang = "en" }: { lang?: string }) {
         <div id="about-bio" style={{ perspective: "1600px" }}>
           <AnimatePresence mode="wait" initial={false}>
             <motion.div key={side} initial={{ opacity: reduceMotion ? 1 : 0, rotateY: reduceMotion ? 0 : -80 }} animate={{ opacity: 1, rotateY: 0 }} exit={{ opacity: reduceMotion ? 1 : 0, rotateY: reduceMotion ? 0 : 80 }} transition={{ duration: reduceMotion ? 0 : 0.2, ease: "easeInOut" }} style={{ backfaceVisibility: "hidden" }} className="grid overflow-hidden rounded-2xl border border-[#eadbd0] bg-white shadow-sm lg:grid-cols-12">
-              <div className="relative aspect-[4/3] bg-[#eee3d8] sm:aspect-[3/2] lg:col-span-5 lg:aspect-auto lg:min-h-[500px]">
-                <Image src="/images/nati.jpg" alt="Natalia" fill sizes="(max-width: 1024px) 100vw, 40vw" className="object-cover object-[center_60%] contrast-[0.95] saturate-[0.95] brightness-[1.03] lg:object-center" />
+              <div data-scroll-reveal className="relative aspect-[4/3] bg-[#eee3d8] sm:aspect-[3/2] lg:col-span-5 lg:aspect-auto lg:min-h-[500px]">
+                <Image src={side === "nutrition" ? "/images/natalia-nutrition.webp" : "/images/nati.jpg"} alt={side === "nutrition" ? es ? "Natalia, nutricionista" : "Natalia, nutritionist" : "Natalia"} fill sizes="(max-width: 1024px) 100vw, 40vw" className={`object-cover contrast-[0.95] saturate-[0.95] brightness-[1.03] lg:object-center ${side === "nutrition" ? "object-[center_30%]" : "object-[center_60%]"}`} />
               </div>
-              <div className="flex flex-col justify-center p-6 sm:p-8 md:p-12 lg:col-span-7 lg:p-16">
+              <div data-scroll-reveal className="flex flex-col justify-center p-6 sm:p-8 md:p-12 lg:col-span-7 lg:p-16">
                 <h2 id="about-title" className="text-4xl leading-[1.1] font-title tracking-tight text-[#985f43] md:text-5xl">
                   {t.title}
                   <span className="mt-3 block text-xl font-normal leading-relaxed text-[#785e4c] md:text-2xl">{t.subtitle}</span>
