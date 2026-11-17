@@ -18,11 +18,19 @@ const mediaItems = [
   },
 ];
 
-export default function VideosCarousel() {
+export default function VideosCarousel({ lang = "en" }: { lang?: "es" | "en" }) {
   const loopMedia = [...mediaItems, ...mediaItems];
 
   return (
-    <section className="w-full py-16 bg-[#8e735b] overflow-hidden">
+    <section aria-labelledby="practice-title" className="w-full py-16 bg-[#fdfbf9] overflow-hidden">
+      <div className="mx-auto mb-8 max-w-6xl px-6 text-[#69483e] md:px-10">
+        <h2 id="practice-title" style={{ fontFamily: "Georgia, serif", fontWeight: 400 }} className="mb-4 text-4xl leading-tight md:text-5xl">
+          {lang === "es" ? "Un poco de mi práctica" : "A glimpse of my practice"}
+        </h2>
+        <p className="text-base leading-relaxed md:text-lg">
+          {lang === "es" ? "Momentos para mover, respirar y conectar." : "Moments to move, breathe and connect."}
+        </p>
+      </div>
       <div className="relative w-full overflow-hidden">
         <div className="flex w-max gap-6 animate-carousel">
           {loopMedia.map((item, index) => (

@@ -57,7 +57,7 @@ export default async function Home({
       <GroupClasses lang={lang} />
       <EndYoga lang={lang} />
       <NutritionSection lang={lang} />
-      <VideosCarousel />
+      <VideosCarousel lang={lang} />
       <Footer />
       <BackToTop lang={lang} />
     </>
