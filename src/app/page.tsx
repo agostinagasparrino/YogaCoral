@@ -1,3 +1,4 @@
+import NatiAssistant from "./components/NatiAssistant";
 import BackToTop from "./components/BackToTop";
 import NutritionSection from "./components/NutritionSection";
 import GroupClasses from "./components/GroupClasses";
@@ -60,6 +61,7 @@ export default async function Home({
       <VideosCarousel lang={lang} />
       <Footer />
       <BackToTop lang={lang} />
+      <NatiAssistant key={lang} lang={lang} />
     </>
   );
 }

@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Outfit } from "next/font/google"; 
+import localFont from "next/font/local";
 import "./globals.css";
 
 // Títulos: Súper moderna, limpia y "cara"
-const titlesFont = Plus_Jakarta_Sans({
+const titlesFont = localFont({
+  src: "./fonts/plus-jakarta-sans-latin.woff2",
   variable: "--font-titles",
-  subsets: ["latin"],
-  weight: ["500", "700"], 
+  weight: "500 700",
   display: "swap",
 });
 
 // Cuerpo: El que te gustó
-const bodyFont = Outfit({
+const bodyFont = localFont({
+  src: "./fonts/outfit-latin.woff2",
   variable: "--font-body",
-  subsets: ["latin"],
-  weight: ["300", "400"],
+  weight: "300 400",
   display: "swap",
 });
 
