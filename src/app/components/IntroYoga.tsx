@@ -40,7 +40,7 @@ const yogaBio = {
     title: "I'm Natalia",
     subtitle: "your yoga teacher",
     paragraphs: [
-      "My journey with yoga began over 4 years ago as a personal search for physical and mental well-being. Over time, it became my lifestyle and my passion: guiding others to reconnect with themselves.",
+      "My journey with yoga began over 5 years ago as a personal search for physical and mental well-being. Over time, it became my lifestyle and my passion: guiding others to reconnect with themselves.",
       "My classes combine mindful movement, breath, and presence. I believe in an accessible, loving, and transformative yoga practice.",
     ],
   },
@@ -49,7 +49,7 @@ const yogaBio = {
     title: "Soy Natalia",
     subtitle: "tu profesora de yoga",
     paragraphs: [
-      "Mi camino en el yoga comenzó hace más de 4 años como una búsqueda personal de bienestar físico y mental. Con el tiempo, se convirtió en mi estilo de vida y mi pasión: guiar a otros a reconectar consigo mismos.",
+      "Mi camino en el yoga comenzó hace más de 5 años como una búsqueda personal de bienestar físico y mental. Con el tiempo, se convirtió en mi estilo de vida y mi pasión: guiar a otros a reconectar consigo mismos.",
       "Mis clases combinan movimiento consciente, respiración y presencia. Creo en una práctica de yoga accesible, amorosa y transformadora.",
     ],
   },

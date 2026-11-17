@@ -61,7 +61,7 @@ export default async function Home({
       <NutritionSection lang={lang} />
       <TestimonialsSection lang={lang} />
       <VideosCarousel lang={lang} />
-      <Footer />
+      <Footer lang={lang} />
       <BackToTop lang={lang} />
       <NatiAssistant key={lang} lang={lang} />
     </>
