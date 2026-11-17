@@ -54,6 +54,7 @@ type ContactModalProps = {
   open: boolean;
   onClose: () => void;
   defaultService?: string;
+  defaultMessage?: string;
   serviceOptions?: string[];
   lang?: string;
 };
@@ -62,6 +63,7 @@ export default function ContactModal({
   open,
   onClose,
   defaultService,
+  defaultMessage = "",
   serviceOptions,
   lang = "en",
 }: ContactModalProps) {
@@ -73,7 +75,7 @@ export default function ContactModal({
   const [email, setEmail] = useState("");
   const [service, setService] = useState("");
   const [mode, setMode] = useState("");
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(defaultMessage);
   const [errors, setErrors] = useState({ name: false, email: false, message: false });
 
   useEffect(() => {
