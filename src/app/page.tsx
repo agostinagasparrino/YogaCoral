@@ -1,4 +1,3 @@
-import StickerAccent from "./components/StickerAccent";
 import BackToTop from "./components/BackToTop";
 import NutritionSection from "./components/NutritionSection";
 import GroupClasses from "./components/GroupClasses";
@@ -53,15 +52,11 @@ export default async function Home({
       />
       
       <IntroYoga lang={lang} />
-      <StickerAccent food="berry" detail="sun" />
       <Classes lang={lang} />
       <PrivateClasses lang={lang} />
-      <StickerAccent food="green" side="right" />
       <GroupClasses lang={lang} />
       <EndYoga lang={lang} />
-      <StickerAccent food="tart" detail="heart" />
       <NutritionSection lang={lang} />
-      <StickerAccent food="berry" side="right" detail="sun" />
       <VideosCarousel lang={lang} />
       <Footer />
       <BackToTop lang={lang} />

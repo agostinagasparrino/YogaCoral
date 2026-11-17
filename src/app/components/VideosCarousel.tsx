@@ -14,6 +14,8 @@ const mediaItems = [
   { type: "video", src: "https://res.cloudinary.com/dax4fjnwx/video/upload/q_auto,f_mp4/v1778295390/carousel6_lepu76.mp4" },
 ];
 
+const loopMedia = [...mediaItems, ...mediaItems, ...mediaItems];
+
 const content = {
   es: {
     title: "Un poco de mi práctica",
@@ -52,6 +54,8 @@ export default function VideosCarousel({ lang = "en" }: { lang?: "es" | "en" }) 
     if (!section || !track) return;
     const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0.15 });
     observer.observe(section);
+    let settleTimer: ReturnType<typeof setTimeout>;
+    const cycleWidth = () => (track.children[mediaItems.length] as HTMLElement).offsetLeft - (track.children[0] as HTMLElement).offsetLeft;
     const updateActive = () => {
       const center = track.scrollLeft + track.clientWidth / 2;
       let closest = 0;
@@ -63,13 +67,28 @@ export default function VideosCarousel({ lang = "en" }: { lang?: "es" | "en" }) 
       });
       setActiveIndex(closest);
     };
-    updateActive();
-    track.addEventListener("scroll", updateActive, { passive: true });
-    window.addEventListener("resize", updateActive);
+    const settleLoop = () => {
+      const cycle = cycleWidth();
+      if (cycle <= 0) return;
+      const halfWidth = track.clientWidth / 2;
+      const normalized = cycle + ((track.scrollLeft + halfWidth - cycle) % cycle + cycle) % cycle - halfWidth;
+      if (Math.abs(normalized - track.scrollLeft) > 1) track.scrollLeft = normalized;
+      updateActive();
+    };
+    const onScroll = () => {
+      updateActive();
+      clearTimeout(settleTimer);
+      settleTimer = setTimeout(settleLoop, 180);
+    };
+    const initialize = () => { track.scrollLeft = cycleWidth(); updateActive(); };
+    initialize();
+    track.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", initialize);
     return () => {
       observer.disconnect();
-      track.removeEventListener("scroll", updateActive);
-      window.removeEventListener("resize", updateActive);
+      clearTimeout(settleTimer);
+      track.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", initialize);
     };
   }, []);
 
@@ -79,16 +98,17 @@ export default function VideosCarousel({ lang = "en" }: { lang?: "es" | "en" }) 
     const desktop = window.matchMedia("(min-width: 768px)");
     let frame = 0;
     let previousTime = 0;
-    let direction = 1;
     let position = track.scrollLeft;
     const animate = (time: number) => {
       if (desktop.matches && !document.hidden) {
         const elapsed = previousTime ? Math.min(time - previousTime, 50) : 0;
-        const max = track.scrollWidth - track.clientWidth;
-        if (position >= max - 1) direction = -1;
-        if (position <= 0) direction = 1;
-        position = Math.max(0, Math.min(max, position + elapsed * 0.012 * direction));
-        track.scrollLeft = position;
+        const cycle = (track.children[mediaItems.length] as HTMLElement).offsetLeft - (track.children[0] as HTMLElement).offsetLeft;
+        if (cycle > 0) {
+          position += elapsed * 0.012;
+          if (position + track.clientWidth / 2 >= cycle * 2) position -= cycle;
+          if (position + track.clientWidth / 2 < cycle) position += cycle;
+          track.scrollLeft = position;
+        }
       }
       previousTime = time;
       frame = requestAnimationFrame(animate);
@@ -166,26 +186,26 @@ export default function VideosCarousel({ lang = "en" }: { lang?: "es" | "en" }) 
         }}
         className="no-scrollbar relative flex gap-6 overflow-x-auto overscroll-x-contain px-6 pb-4 snap-x snap-mandatory md:snap-none focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#985f43] md:px-10"
       >
-        {mediaItems.map((item, index) => (
-          <figure key={item.src} className="w-[76vw] max-w-[320px] shrink-0 snap-center md:w-[300px] lg:w-[340px] lg:max-w-[340px]">
+        {loopMedia.map((item, index) => (
+          <figure key={`${item.src}-${index}`} aria-hidden={index < mediaItems.length || index >= mediaItems.length * 2 ? true : undefined} inert={index < mediaItems.length || index >= mediaItems.length * 2 ? true : undefined} className="w-[76vw] max-w-[320px] shrink-0 snap-center md:w-[300px] lg:w-[340px] lg:max-w-[340px]">
             <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-[#eadbd0] bg-[#eee3d8]">
               {item.type === "video" ? (
                 <video
                   src={item.src}
                   poster={item.src.replace("/video/upload/q_auto,f_mp4/", "/video/upload/so_0,f_jpg,q_auto,w_680/").replace(/\.mp4$/, ".jpg")}
-                  muted loop playsInline controls preload="none"
-                  aria-label={`${t.moment} ${index + 1}`}
+                  muted loop playsInline controls={index >= mediaItems.length && index < mediaItems.length * 2} preload="none"
+                  aria-label={`${t.moment} ${index % mediaItems.length + 1}`}
                   onPlay={(event) => {
                     trackRef.current?.querySelectorAll("video").forEach((video) => { if (video !== event.currentTarget) video.pause(); });
                   }}
                   className="absolute inset-0 h-full w-full object-cover"
                 />
               ) : (
-                <Image src={item.src} alt={`${t.moment} ${index + 1}`} fill sizes="(min-width: 1024px) 340px, (min-width: 768px) 300px, 76vw" className="object-cover" />
+                <Image src={item.src} alt={index >= mediaItems.length && index < mediaItems.length * 2 ? `${t.moment} ${index % mediaItems.length + 1}` : ""} fill sizes="(min-width: 1024px) 340px, (min-width: 768px) 300px, 76vw" className="object-cover" />
               )}
             </div>
             <figcaption className="mt-3 flex items-center justify-between px-1 text-xs uppercase tracking-[0.15em] text-[#985f43]">
-              <span>{item.type === "video" ? t.video : t.photo}</span><span>{String(index + 1).padStart(2, "0")} / 06</span>
+              <span>{item.type === "video" ? t.video : t.photo}</span><span>{String(index % mediaItems.length + 1).padStart(2, "0")} / 06</span>
             </figcaption>
           </figure>
         ))}
