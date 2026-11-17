@@ -1,4 +1,7 @@
-import { Star } from "lucide-react";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { ArrowLeft, ArrowRight, Star } from "lucide-react";
 
 const testimonials = [
   { name: "Agostina", service: { es: "Yoga grupal", en: "Group yoga" }, quote: { es: "Fui con Oli y nos encantó. Nati te hace sentir cómoda desde el primer momento.", en: "I went with Oli and we loved it. Nati makes you feel comfortable from the very first moment." } },
@@ -14,6 +17,31 @@ const testimonials = [
 
 export default function TestimonialsSection({ lang }: { lang: "es" | "en" }) {
   const es = lang === "es";
+  const track = useRef<HTMLDivElement>(null);
+  const [edges, setEdges] = useState({ start: true, end: false });
+  function updateEdges() {
+    const element = track.current;
+    if (!element) return;
+    const start = element.scrollLeft <= 2;
+    const end = element.scrollLeft + element.clientWidth >= element.scrollWidth - 2;
+    setEdges(previous => previous.start === start && previous.end === end ? previous : { start, end });
+  }
+  useEffect(() => {
+    const element = track.current;
+    if (!element) return;
+    const observer = new ResizeObserver(updateEdges);
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+  function move(direction: number) {
+    const element = track.current;
+    const card = element?.querySelector("li");
+    if (!element || !card) return;
+    const stride = card.getBoundingClientRect().width + 16;
+    const count = Math.max(1, Math.round(element.clientWidth / stride));
+    const index = Math.round(element.scrollLeft / stride);
+    element.scrollTo({ left: (index + direction * count) * stride, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+  }
   return (
     <section id="experiences" lang={lang} aria-labelledby="experiences-title" className="scroll-mt-28 overflow-hidden bg-[#f4eae3] py-16 text-[#69483e] md:py-24">
       <div className="mx-auto max-w-6xl px-6 md:px-10">
@@ -23,10 +51,10 @@ export default function TestimonialsSection({ lang }: { lang: "es" | "en" }) {
           <p className="mt-5 text-[1.0625rem] leading-7">{es ? "Palabras de quienes compartieron conmigo su práctica y su camino de bienestar." : "Words from those who have shared their practice and wellbeing journey with me."}</p>
         </header>
         <p id="experiences-hint" className="mb-4 text-sm text-[#785e4c] md:hidden">{es ? "Deslizá para conocer más experiencias →" : "Swipe to explore more experiences →"}</p>
-        <div role="region" aria-label={es ? "Comentarios y puntuaciones" : "Reviews and ratings"} aria-describedby="experiences-hint" tabIndex={0} className="snap-x snap-mandatory overflow-x-auto overscroll-x-contain rounded-2xl md:overflow-visible focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#985f43]">
-          <ul className="flex gap-4 pb-4 md:grid md:grid-cols-2 md:pb-0 lg:grid-cols-3">
+        <div ref={track} id="experiences-track" onScroll={updateEdges} role="region" aria-label={es ? "Comentarios y puntuaciones" : "Reviews and ratings"} aria-describedby="experiences-hint" tabIndex={0} className="snap-x snap-mandatory overflow-x-auto overscroll-x-contain rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#985f43]">
+          <ul className="flex gap-4 pb-4">
             {testimonials.map(item => (
-              <li key={item.name} className="flex w-[88%] shrink-0 snap-start flex-col rounded-2xl border border-[#eadbd0] bg-[#fdfbf9] p-6 md:w-auto md:p-7">
+              <li key={item.name} className="flex w-[88%] shrink-0 snap-start flex-col rounded-2xl border border-[#eadbd0] bg-[#fdfbf9] p-6 md:w-[calc((100%-1rem)/2)] md:p-7 lg:w-[calc((100%-2rem)/3)]">
                 <div role="img" aria-label={es ? "5 de 5 estrellas" : "5 out of 5 stars"} className="mb-5 flex gap-1 text-[#a76d54]">
                   {Array.from({ length: 5 }, (_, i) => <Star key={i} aria-hidden="true" size={16} strokeWidth={1.3} fill="currentColor" />)}
                 </div>
@@ -37,6 +65,10 @@ export default function TestimonialsSection({ lang }: { lang: "es" | "en" }) {
               </li>
             ))}
           </ul>
+        </div>
+        <div className="mt-5 flex justify-end gap-3" role="group" aria-label={es ? "Navegar opiniones" : "Browse reviews"}>
+          <button type="button" onClick={() => move(-1)} disabled={edges.start} aria-controls="experiences-track" aria-label={es ? "Opiniones anteriores" : "Previous reviews"} className="flex h-12 w-12 items-center justify-center rounded-full border border-[#985f43] text-[#985f43] motion-safe:transition-colors hover:bg-[#eadbd0] disabled:cursor-default disabled:opacity-35 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#985f43]"><ArrowLeft size={20} aria-hidden="true" /></button>
+          <button type="button" onClick={() => move(1)} disabled={edges.end} aria-controls="experiences-track" aria-label={es ? "Opiniones siguientes" : "Next reviews"} className="flex h-12 w-12 items-center justify-center rounded-full border border-[#985f43] text-[#985f43] motion-safe:transition-colors hover:bg-[#eadbd0] disabled:cursor-default disabled:opacity-35 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#985f43]"><ArrowRight size={20} aria-hidden="true" /></button>
         </div>
       </div>
     </section>
