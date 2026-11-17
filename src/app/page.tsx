@@ -1,3 +1,4 @@
+import TestimonialsSection from "./components/TestimonialsSection";
 import NatiAssistant from "./components/NatiAssistant";
 import BackToTop from "./components/BackToTop";
 import NutritionSection from "./components/NutritionSection";
@@ -58,6 +59,7 @@ export default async function Home({
       <GroupClasses lang={lang} />
       <EndYoga lang={lang} />
       <NutritionSection lang={lang} />
+      <TestimonialsSection lang={lang} />
       <VideosCarousel lang={lang} />
       <Footer />
       <BackToTop lang={lang} />
