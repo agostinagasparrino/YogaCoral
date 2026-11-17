@@ -107,10 +107,10 @@ export default function NatiAssistant({ lang }: { lang: Lang }) {
         transition={{ duration: reduceMotion ? 0 : 0.4, ease: "easeOut" }}
         className="fixed left-4 bottom-[calc(1.25rem+env(safe-area-inset-bottom))] z-50 md:left-auto md:right-4 md:bottom-6"
       >
-        <button ref={launcher} type="button" onClick={() => setOpen(value => !value)} aria-label={t.open} aria-expanded={open} aria-controls="nati-assistant" className="relative flex h-24 w-24 items-center justify-center bg-transparent md:h-36 md:w-24 motion-safe:transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#985f43]">
+        <button ref={launcher} type="button" onClick={() => setOpen(value => !value)} aria-label={t.open} aria-expanded={open} aria-controls="nati-assistant" className="relative flex h-24 w-24 items-center justify-center bg-transparent motion-safe:transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#985f43]">
           {!open && <span className="absolute bottom-full left-0 mb-2 whitespace-nowrap rounded-2xl rounded-bl-sm border border-[#decbbd] bg-[#fdfbf9] px-4 py-2.5 text-sm font-medium text-[#69483e] shadow-sm md:left-auto md:right-0 md:rounded-bl-2xl md:rounded-br-sm">{lang === "es" ? "¿Querés que te guíe?" : "Would you like some help?"}</span>}
-          <span className="relative block h-24 w-24 overflow-hidden rounded-full border border-[#decbbd] bg-[#fdfbf9] shadow-md md:h-36 md:overflow-visible md:rounded-none md:border-0 md:bg-transparent md:shadow-none">
-            <Image src="/images/nati-assistant-standing.webp" alt="" width={427} height={640} className="absolute -top-1 left-1/2 h-48 w-auto max-w-none -translate-x-1/2 object-contain md:top-0 md:h-36" />
+          <span className="relative block h-24 w-24 overflow-hidden rounded-full border border-[#decbbd] bg-[#fdfbf9] shadow-md">
+            <Image src="/images/nati-assistant-standing.webp" alt="" width={427} height={640} className="absolute -top-1 left-1/2 h-48 w-auto max-w-none -translate-x-1/2 object-contain" />
           </span>
         </button>
       </motion.div>}
