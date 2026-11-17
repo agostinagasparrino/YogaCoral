@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Send, X, ArrowLeft } from "lucide-react";
 import ContactModal from "./ContactModal";
@@ -38,6 +39,7 @@ const ids: Record<Topic, string> = { private: "private-classes", group: "group-c
 
 export default function NatiAssistant({ lang }: { lang: Lang }) {
   const t = copy[lang];
+  const reduceMotion = useReducedMotion();
   const [open, setOpen] = useState(false);
   const [pastHero, setPastHero] = useState(false);
   const [topic, setTopic] = useState<Topic | null>(null);
@@ -96,9 +98,21 @@ export default function NatiAssistant({ lang }: { lang: Lang }) {
     if (found) { setTopic(found); setStep("topic"); } else { setTopic(null); setDetail(value); setStep("fallback"); }
   }
   return <>
-    {!contact && <button ref={launcher} type="button" onClick={() => setOpen(value => !value)} aria-label={t.open} aria-expanded={open} aria-controls="nati-assistant" className={`fixed left-4 bottom-[calc(1.25rem+env(safe-area-inset-bottom))] z-50 ${pastHero ? "flex" : "hidden md:flex"} h-32 w-[86px] items-center justify-center bg-transparent md:left-auto md:right-4 md:bottom-6 md:h-36 md:w-24 motion-safe:transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#985f43]`}>
-      <Image src="/images/nati-assistant-standing.webp" alt="" width={427} height={640} className="h-32 w-auto object-contain md:h-36" />
-    </button>}
+    <AnimatePresence>
+      {pastHero && !contact && <motion.div
+        key="nati-launcher"
+        initial={{ opacity: 0, y: reduceMotion ? 0 : 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: reduceMotion ? 0 : 10 }}
+        transition={{ duration: reduceMotion ? 0 : 0.4, ease: "easeOut" }}
+        className="fixed left-4 bottom-[calc(1.25rem+env(safe-area-inset-bottom))] z-50 md:left-auto md:right-4 md:bottom-6"
+      >
+        <button ref={launcher} type="button" onClick={() => setOpen(value => !value)} aria-label={t.open} aria-expanded={open} aria-controls="nati-assistant" className="relative flex h-32 w-[86px] items-center justify-center bg-transparent md:h-36 md:w-24 motion-safe:transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#985f43]">
+          {!open && <span className="absolute bottom-full left-0 mb-2 whitespace-nowrap rounded-2xl rounded-bl-sm border border-[#decbbd] bg-[#fdfbf9] px-4 py-2.5 text-sm font-medium text-[#69483e] shadow-sm md:left-auto md:right-0 md:rounded-bl-2xl md:rounded-br-sm">{lang === "es" ? "¿Querés que te guíe?" : "Would you like some help?"}</span>}
+          <Image src="/images/nati-assistant-standing.webp" alt="" width={427} height={640} className="h-32 w-auto object-contain md:h-36" />
+        </button>
+      </motion.div>}
+    </AnimatePresence>
     {open && <section ref={panel} id="nati-assistant" role="dialog" aria-labelledby="nati-assistant-title" lang={lang} className="fixed inset-x-3 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-[90] flex max-h-[calc(100svh-2rem-env(safe-area-inset-bottom))] flex-col overflow-hidden rounded-3xl border border-[#decbbd] bg-[#fdfbf9] text-[#69483e] shadow-2xl sm:left-auto sm:right-6 sm:bottom-4 sm:w-[380px] sm:max-h-[min(640px,calc(100svh-2rem))] md:bottom-44 md:max-h-[min(640px,calc(100svh-12rem))]">
       <header className="flex shrink-0 items-center gap-3 border-b border-[#eadbd0] bg-[#f2e8df] px-4 py-3">
         <Image src="/images/nati-assistant-standing.webp" alt="" width={427} height={640} className="h-12 w-auto shrink-0 object-contain" />
