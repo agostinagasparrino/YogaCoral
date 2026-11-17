@@ -95,7 +95,7 @@ export default function IntroYoga({ lang = "en" }: { lang?: string }) {
                 </h2>
                 <div className="mt-8 space-y-6">
                   {t.paragraphs.map(text => <p key={text} className="max-w-prose font-body text-[1.0625rem] leading-7 text-[#69483e] md:text-lg md:leading-relaxed">{text}</p>)}
-                  {side === "nutrition" && <p className="border-l-2 border-[#d7bdb3] pl-5 font-serif text-xl italic leading-relaxed text-[#8e735b]">{nutrition.philosophy}</p>}
+                  <p className="border-l-2 border-[#d7bdb3] pl-5 font-serif text-xl italic leading-relaxed text-[#8e735b]">{side === "nutrition" ? nutrition.philosophy : es ? "Mi intención es guiarte a reconectar con vos, escuchar tu cuerpo y encontrar en el movimiento y la respiración una forma de cuidarte." : "My intention is to guide you to reconnect with yourself, listen to your body and find a way to care for yourself through movement and breath."}</p>
                 </div>
               </div>
             </motion.div>
