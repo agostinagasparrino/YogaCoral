@@ -44,6 +44,7 @@ export default function ClassSection({
           
           {/* TEXTO */}
           <div
+            data-scroll-reveal
             className={`
               w-full max-w-xl space-y-6
               order-1
@@ -76,6 +77,7 @@ export default function ClassSection({
 
           {/* VIDEO */}
           <div
+            data-scroll-reveal
             className={`
               w-full flex justify-center
               order-2

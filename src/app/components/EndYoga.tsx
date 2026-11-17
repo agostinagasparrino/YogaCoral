@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 // 1. Traducciones del componente
 const content = {
@@ -24,10 +24,11 @@ export default function EndYoga({ lang = "en" }: { lang?: string }) {
   // Seleccionamos el idioma
   const t = content[lang as keyof typeof content] || content.en;
 
+  const reduceMotion = useReducedMotion();
   const fadeInUp = {
-    initial: { opacity: 0, y: 30 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: false },
+    initial: false as const,
+    whileInView: reduceMotion ? {} : { opacity: [0, 1], y: [14, 0] },
+    viewport: { once: true, amount: 0.08 },
     transition: { duration: 0.6 }
   };
 

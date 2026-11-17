@@ -23,7 +23,7 @@ export default function VideosCarousel({ lang = "en" }: { lang?: "es" | "en" }) 
 
   return (
     <section aria-labelledby="practice-title" className="w-full py-16 bg-[#fdfbf9] overflow-hidden">
-      <div className="mx-auto mb-8 max-w-6xl px-6 text-[#69483e] md:px-10">
+      <div data-scroll-reveal className="mx-auto mb-8 max-w-6xl px-6 text-[#69483e] md:px-10">
         <h2 id="practice-title" style={{ fontFamily: "Georgia, serif", fontWeight: 400 }} className="mb-4 text-4xl leading-tight md:text-5xl">
           {lang === "es" ? "Un poco de mi práctica" : "A glimpse of my practice"}
         </h2>
@@ -31,7 +31,7 @@ export default function VideosCarousel({ lang = "en" }: { lang?: "es" | "en" }) 
           {lang === "es" ? "Momentos para mover, respirar y conectar." : "Moments to move, breathe and connect."}
         </p>
       </div>
-      <div className="relative w-full overflow-hidden">
+      <div data-scroll-reveal className="relative w-full overflow-hidden">
         <div className="flex w-max gap-6 animate-carousel">
           {loopMedia.map((item, index) => (
             <div

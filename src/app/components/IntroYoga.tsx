@@ -85,10 +85,10 @@ export default function IntroYoga({ lang = "en" }: { lang?: string }) {
         <div id="about-bio" style={{ perspective: "1600px" }}>
           <AnimatePresence mode="wait" initial={false}>
             <motion.div key={side} initial={{ opacity: reduceMotion ? 1 : 0, rotateY: reduceMotion ? 0 : -80 }} animate={{ opacity: 1, rotateY: 0 }} exit={{ opacity: reduceMotion ? 1 : 0, rotateY: reduceMotion ? 0 : 80 }} transition={{ duration: reduceMotion ? 0 : 0.2, ease: "easeInOut" }} style={{ backfaceVisibility: "hidden" }} className="grid overflow-hidden rounded-2xl border border-[#eadbd0] bg-white shadow-sm lg:grid-cols-12">
-              <div className="relative aspect-[4/3] bg-[#eee3d8] sm:aspect-[3/2] lg:col-span-5 lg:aspect-auto lg:min-h-[500px]">
+              <div data-scroll-reveal className="relative aspect-[4/3] bg-[#eee3d8] sm:aspect-[3/2] lg:col-span-5 lg:aspect-auto lg:min-h-[500px]">
                 <Image src="/images/nati.jpg" alt="Natalia" fill sizes="(max-width: 1024px) 100vw, 40vw" className="object-cover object-[center_60%] contrast-[0.95] saturate-[0.95] brightness-[1.03] lg:object-center" />
               </div>
-              <div className="flex flex-col justify-center p-6 sm:p-8 md:p-12 lg:col-span-7 lg:p-16">
+              <div data-scroll-reveal className="flex flex-col justify-center p-6 sm:p-8 md:p-12 lg:col-span-7 lg:p-16">
                 <h2 id="about-title" className="text-4xl leading-[1.1] font-title tracking-tight text-[#985f43] md:text-5xl">
                   {t.title}
                   <span className="mt-3 block text-xl font-normal leading-relaxed text-[#785e4c] md:text-2xl">{t.subtitle}</span>

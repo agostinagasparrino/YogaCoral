@@ -1,3 +1,4 @@
+import ScrollReveals from "./components/ScrollReveals";
 import TestimonialsSection from "./components/TestimonialsSection";
 import NatiAssistant from "./components/NatiAssistant";
 import BackToTop from "./components/BackToTop";
@@ -39,6 +40,7 @@ export default async function Home({
   return (
     <>
       {/* 2. Le pasamos el lang al Navbar */}
+      <ScrollReveals />
       <Navbar lang={lang} />
       
       <Hero 
